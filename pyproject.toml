@@ -1,0 +1,10 @@
+[project]
+name = "tiff2sqlitedb"
+version = "0.1.0"
+description = "Convert GeoTIFF files to OsmAnd SQLiteDB format"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pillow>=9.0.0",
+    "tqdm>=4.0.0"
+]
