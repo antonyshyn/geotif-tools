@@ -107,7 +107,8 @@ class TiffToOsmandConverter:
 
             # Build overviews (zoom levels) using gdaladdo with cubic resampling
             print("Generating zoom levels...")
-            addo_cmd = ['gdaladdo', '-r', 'cubic', output_path]
+            levels = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+            addo_cmd = ['gdaladdo', '-r', 'cubic', output_path] + [str(level) for level in levels]
 
             if self.verbose:
                 print(f"Running: {' '.join(addo_cmd)}")
