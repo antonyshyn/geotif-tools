@@ -37,15 +37,13 @@ uv run geotif sqlitedb <src.tif> <out.sqlitedb> [options]
 | `--max-zoom N` | auto (from source GSD) | deepest OSM zoom |
 | `--tile-size 256\|512` | 512 | pixel size per tile (512 = retina) |
 | `--jpeg-quality 1..100` | 90 | JPEG quality for opaque tiles |
-| `--workers N` | CPU count | parallel renderers |
 
 Example:
 
 ```bash
 uv run geotif sqlitedb input.tif output.sqlitedb \
     --min-zoom 7 --max-zoom 15 \
-    --jpeg-quality 90 \
-    --workers 8
+    --jpeg-quality 90
 ```
 
 Notes:

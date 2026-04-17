@@ -245,7 +245,6 @@ def add_args(p) -> None:
                    help="deepest OSM zoom; default auto from source GSD")
     p.add_argument("--tile-size", type=int, default=512, choices=[256, 512])
     p.add_argument("--jpeg-quality", type=int, default=90)
-    p.add_argument("--workers", type=int, default=max(1, os.cpu_count() or 1))
 
 
 def run(a) -> int:
@@ -253,12 +252,13 @@ def run(a) -> int:
     osm_min = a.min_zoom if a.min_zoom is not None else max(0, osm_max - 4)
     if osm_min > osm_max:
         osm_min, osm_max = osm_max, osm_min
+    workers = max(1, os.cpu_count() or 1)
 
     print(f"source     : {a.src}")
     print(f"output     : {a.dst}")
     print(f"osm zoom   : {osm_min}..{osm_max}  "
           f"(stored z {STORED_Z_OFFSET - osm_max}..{STORED_Z_OFFSET - osm_min})")
-    print(f"tile size  : {a.tile_size} px  jpeg q={a.jpeg_quality}  workers={a.workers}")
+    print(f"tile size  : {a.tile_size} px  jpeg q={a.jpeg_quality}  workers={workers}")
 
-    build(a.src, a.dst, osm_min, osm_max, a.tile_size, a.jpeg_quality, a.workers)
+    build(a.src, a.dst, osm_min, osm_max, a.tile_size, a.jpeg_quality, workers)
     return 0
